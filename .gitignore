@@ -1,0 +1,7 @@
+.DS_Store
+api/venv/
+api/.env
+api/__pycache__
+api/.flaskenv
+build/
+*.pyc
