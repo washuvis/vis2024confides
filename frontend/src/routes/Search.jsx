@@ -1,11 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import jsonFiles from "../helper/localJSONImporter";
 import CardContainer from "../components/CardContainer";
-import { InputGroup, Form } from "react-bootstrap";
-import Nav from "../components/Nav";
-import PaginationComponent from "../components/PaginationComponent";
 import { useLocation } from "react-router-dom";
-import TaskComponent from "../components/TaskComponent";
 import UploadFileModal from "../components/UploadFileModal";
 import uploadedItemsModel from "../model/UploadedItemsModel";
 import SideNav from "../components/SideNav";
@@ -33,19 +29,19 @@ const Search = (props) => {
       let names = [];
       data.data.forEach((item) => {
         const fileName = item.Key.split("/")[1].split(".")[0];
-        console.log(fileName);
+        // console.log(fileName);
         if (fileName !== "") {
           names.push(fileName);
         }
       });
       setFileNames((fileNames) => names);
     });
-    console.log(fileNames);
+    // console.log(fileNames);
   }
 
   useEffect(() => {
     getFiles();
-    console.log(fileNames);
+    // console.log(fileNames);
     setSentences([]);
     for (let f in jsonFiles) {
       let result = jsonFiles[f].results.segments;

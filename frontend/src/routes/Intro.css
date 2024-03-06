@@ -1,0 +1,17 @@
+/* @import 'bootstrap/dist/css/bootstrap.min.css'; */
+
+.text-box {
+    padding-top: 5vh;
+}
+
+.question {
+    width: 100%;
+}
+
+.no-margin-row {
+    margin: 0px;
+}
+
+h1 {
+    text-align: center;
+}
