@@ -1,22 +1,12 @@
 import { Sidebar, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
-import { Link } from "react-router-dom";
 import logo from "../assets/logo.png"; // Adjust the path accordingly
 
 import {
-  HiChartPie,
-  HiClipboard,
-  HiCollection,
   HiInformationCircle,
-  HiLogin,
-  HiPencil,
   HiSearch,
-  HiShoppingBag,
-  HiUsers,
-  HiOutlineViewBoards,
   HiOutlineMenu,
   HiUpload,
 } from "react-icons/hi";
@@ -40,7 +30,7 @@ const SideNav = ({ handleModal }) => {
             <Sidebar.Logo
               href="/"
               img={logo}
-              imgAlt="Flowbite logo"
+              imgAlt="logo"
               className="text-md flex justify-center items-center"
             >
               ConFides
@@ -62,14 +52,6 @@ const SideNav = ({ handleModal }) => {
                   onClick={() => setCollapse(!collapse)}
                   icon={HiOutlineMenu}
                 ></Sidebar.Item>
-
-                <Sidebar.Item href="/authentication/sign-in" icon={HiLogin}>
-                  {collapse ? null : <p> Sign In</p>}
-                </Sidebar.Item>
-
-                <Sidebar.Item href="/authentication/sign-up" icon={HiPencil}>
-                  {collapse ? "" : "Sign Up"}
-                </Sidebar.Item>
               </Sidebar.ItemGroup>
               <Sidebar.ItemGroup>
                 <Sidebar.Item icon={HiUpload} onClick={handleModal}>

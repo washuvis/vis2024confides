@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import {Row, Col} from 'react-bootstrap';
 import { Button } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
+import './Intro.css';
+
 const Intro = (props) => {
-  const vis_list = ["box", "histogram", "violin"];
   const DEFAULT_ENTROPY = 16;
-  const vis_type = vis_list[Math.floor(Math.random() * vis_list.length)];
   const user = navigator.userAgent;
   const browser_supported =
     user.includes("Chrome") ||
@@ -31,13 +31,11 @@ const Intro = (props) => {
       .replace(/\+/g, "-")
       .replace(/\//g, "_");
   const toExp = () => {
-    window.sessionStorage.setItem("vis_type", vis_type);
     window.sessionStorage.setItem("user_id", tokenUrlsafe());
     window.sessionStorage.setItem("remaining_time", 20 * 60 * 1000);
 
     navigate("/search", {
       state: {
-        vis_type: vis_type,
       },
     });
   };
@@ -45,8 +43,8 @@ const Intro = (props) => {
   return (
     <>
       {mobile_device || !browser_supported ? (
-        <div className={"justify-content-center"}>
-          <div className={"text-box text-justify"}>
+        <Row className={"justify-content-center"}>
+          <Col lg={6} className={"text-box text-justify"}>
             <p>Sorry, your browser or mobile device is not supported.</p>
             <p>
               Please download{" "}
@@ -55,11 +53,11 @@ const Intro = (props) => {
               <a href={"https://www.google.com/chrome/"}>Chrome</a> (version 85
               or newer) on your computer and try again.
             </p>
-          </div>
-        </div>
+          </Col>
+        </Row>
       ) : (
-        <div className={"justify-content-center flex my-16 relative"}>
-          <div className={"text-box w-2/4 justify-center items-center"}>
+        <Row className={"justify-content-center no-margin-row"}>
+          <Col lg={6} className={"text-box text-justify"}>
             <p>
               We invite you to participate in a research study being conducted
               by investigators from Washington University in St. Louis. The
@@ -124,15 +122,15 @@ const Intro = (props) => {
               this research study.
             </p>
 
-            <div className="flex justify-center items-center">
-              <Button color="dark" onClick={toExp} className={"btn-sm"}>
+            <div className={"text-center"}>
+              <Button color="dark" onClick={toExp} className={"btn-sm"} variant={"success"}>
                 I agree to participate.
               </Button>
             </div>
 
             <p className={"text-box"}></p>
-          </div>
-        </div>
+          </Col>
+        </Row>
       )}
     </>
   );

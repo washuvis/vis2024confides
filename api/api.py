@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, request, jsonify, send_file,make_response, render_template, send_from_directory
 from flask_cors import CORS, cross_origin
 import aws_transcribe
+import context_window_analyzer
 import average_conf_val
 import io
 import os
@@ -41,6 +42,15 @@ def getAudio():
     response = aws_transcribe.get_audio(filename=file_name)
     return response
    
+@app.route('/contextwindow',methods = ['POST'])
+@cross_origin()
+def post_context_windows():
+    filename = request.json['filename']
+    print(filename)
+    target_word = request.json['target_word']
+    num_words = int(request.json["num_words"])
+    return context_window_analyzer.publish_context_windows(filename, target_word, num_words)
+
 # @app.route('/')
 # def index():
 #     return render_template("index.html")
