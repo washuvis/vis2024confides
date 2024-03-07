@@ -83,7 +83,7 @@ const AudioPlayer = (props) => {
       <br></br>
       <div className="flex gap-2">
         <audio
-          className="h-6 w-4/5 color-white"
+          className="h-6 w-4/5 color-white pl-5"
           src={audioURL}
           type="audio/mpeg"
           controls

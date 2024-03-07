@@ -122,26 +122,27 @@ const ConfValVisualizer = ({
       .attr("fill-opacity", (d, i) => d3.mean(d.listWords, (w) => w.conf_val))
       .attr("stroke-opacity", 1)
       .on("mouseover", (event, d) => {
+        const opacity = parseInt(d3.mean(d.listWords, (w) => w.conf_val) * 100);
         const content = (
           `<p>
               <b>Line Number:</b> ${data.indexOf(d) + 1}
             </p>
-            <div className="flex">
-              <p className="font-bold">Average Confidence Value:</p>
+            <div class="flex">
+              <p><b>Average Confidence Value:</b></p>
               <div
-                className="bg-sky-500 text-white rounded-sm w-12 mx-2 text-center">
+                class="bg-sky-500 text-white rounded-sm w-12 mx-2 text-center opacity-${opacity}">
                 ${d3.mean(d.listWords, (w) => w.conf_val).toFixed(2)}
               </div>
             </div>
-
             <p>
-              <span className="font-bold"> Text: </span> ${d.text}{" "}
+              <span class="font-bold"> Transcription: </span> ${d.text}
             </p>`
-        )
+        );
+
         tooltip.style("opacity", 1)
                 .html(content)
-                .style("left", (event.pageX) + "px")
-                .style("top", (event.pageY - 28) + "px");
+                .style("left", (event.x)/2 + "px")
+                .style("top", (event.y)/2 + "px");
 
       })
       .on("mouseout", (event, d) => {
@@ -158,11 +159,11 @@ const ConfValVisualizer = ({
   }, [data, activeIndex]);
   const tooltip = d3.select(tooltipRef.current)
       .style("opacity", 0)
-      .style("background-color", "white")
+      .attr("class", "tooltip")
       .style("border", "solid")
       .style("border-width", "1px")
       .style("border-radius", "5px")
-      .style("padding", "10px");
+      .style("padding", "5px");
 
   return (
     <div className="flex flex-col mx-4 relative overflow-y-auto relative">
@@ -198,9 +199,8 @@ const ConfValVisualizer = ({
         ref={divRef}
         style={{ height: "40rem" }}
       >
-        <svg className="text-center" ref={svgRef}>
-          <div ref={tooltipRef}></div>
-        </svg>
+        <div ref={tooltipRef}></div>
+        <svg className="text-center" ref={svgRef}></svg>
       </div>
     </div>
   );

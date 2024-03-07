@@ -4,7 +4,7 @@ import {
   HiSearch,
   HiChevronDown,
   HiChevronUp,
-  HiOutlineX
+  HiX
 } from "react-icons/hi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -178,22 +178,16 @@ const WordSearchController = ({
         >
           <HiSearch className="dark:fill-white" />
         </button>
-
         <button className="text-center text-s dark:fill-white" onClick={up}>
           <HiChevronUp className="dark:fill-white" />
         </button>
-
         <button
-          className="text-center text-s dark:fill-white "
-          onClick={down}
-        >
+          className="text-center text-s dark:fill-white" onClick={down}>
           <HiChevronDown className="dark:fill-white" />
         </button>
         <button
-          className="text-center text-s dark:fill-white "
-          onClick={cancelSearch}
-        >
-          <HiOutlineX className="dark:fill-white" />
+          className="text-center text-s dark:fill-white" onClick={cancelSearch}>
+          <HiX className="dark:fill-white" />
         </button>
       </div>
       </InputGroup>
