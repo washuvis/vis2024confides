@@ -2,8 +2,9 @@ import React, { useRef, useState, useEffect } from "react";
 import { InputGroup, Form, Row, Col, Modal } from "react-bootstrap";
 import {
   HiSearch,
-  HiArrowUp,
-  HiArrowDown,
+  HiChevronDown,
+  HiChevronUp,
+  HiOutlineX
 } from "react-icons/hi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -52,7 +53,6 @@ const WordSearchController = ({
       setCurrentIndex((i) => 0);
       setLastIndex(tempSearchIndices.length - 1);
       tempSearchIndices.sort((a, b) => a - b);
-      console.log(tempSearchIndices);
 
       setSearchIndices((indices) => [...tempSearchIndices]);
 
@@ -77,6 +77,20 @@ const WordSearchController = ({
     setSearchHistory(JSON.parse(sessionStorage.getItem("searchHistory")));
     setDataLoading(false);
   };
+
+  const cancelSearch = () => {
+    setDataLoading((dataLoading) => true);
+    setSearchWord("");
+    searchRef.current.children[0].children[0].value = "";
+    searchIndices.forEach((seachIndex, index) => {
+      segmentsData[seachIndex].highlight = "transparent";
+    })
+    setTranscriptionViewActiveIndex(0);
+    setCurrentIndex(0);
+    setLastIndex(0);
+    setSearchIndices([]);
+    setDataLoading(false);
+  }
 
   const up = () => {
     setDataLoading(true);
@@ -138,46 +152,50 @@ const WordSearchController = ({
   }, [currentIndex, searchWord]);
 
   return (
-    <div className="flex h-16  justify-center items-center rounded-xl">
+    <div className="flex gap-2">
       <InputGroup
         className="dark:fill-white "
         ref={searchRef}
         style={{ textAlign: "center" }}
       >
-        <div className="border rounded-lg flex px-2">
-          <Form.Control
-            className=" text-m bg-gray-100 dark:bg-gray-500 dark:color-white"
-            placeholder="Search Target Words"
-            aria-label="Search"
-            aria-describedby="search-addon"
-            style={{ border: "none" }}
-          />
-          <button
-            style={{
-              textAlign: "center",
-            }}
-            onClick={() => search()}
-            className="text-center text-s dark:fill-white"
-          >
-            <HiSearch className="dark:fill-white" />
-          </button>
-        </div>
-        <InputGroup.Text className="text-center text-s dark:text-white  dark:bg-gray-500">
-          {currentIndex + 1}/{lastIndex + 1}
+      <div className="border rounded-lg flex px-2">
+        <Form.Control
+          className=" text-m bg-gray-100 dark:bg-gray-500 dark:color-white"
+          placeholder="Search Target Words"
+          aria-label="Search"
+          aria-describedby="search-addon"
+          style={{ border: "none" }}
+        />
+        <InputGroup.Text>
+        {searchWord === "" ? "" : (currentIndex + 1) + "/" + (lastIndex + 1) + ""}
         </InputGroup.Text>
+        <button
+          style={{
+            textAlign: "center",
+          }}
+          onClick={() => search()}
+          className="pl-2 text-center text-s dark:fill-white"
+        >
+          <HiSearch className="dark:fill-white" />
+        </button>
 
-        <div className="border rounded-lg flex gap-2 justify-center items-center px-2">
-          <button className="text-center text-s  dark:fill-white" onClick={up}>
-            <HiArrowUp className="dark:fill-white" />
-          </button>
+        <button className="text-center text-s dark:fill-white" onClick={up}>
+          <HiChevronUp className="dark:fill-white" />
+        </button>
 
-          <button
-            className="text-center text-s  dark:fill-white "
-            onClick={down}
-          >
-            <HiArrowDown className="dark:fill-white" />
-          </button>
-        </div>
+        <button
+          className="text-center text-s dark:fill-white "
+          onClick={down}
+        >
+          <HiChevronDown className="dark:fill-white" />
+        </button>
+        <button
+          className="text-center text-s dark:fill-white "
+          onClick={cancelSearch}
+        >
+          <HiOutlineX className="dark:fill-white" />
+        </button>
+      </div>
       </InputGroup>
     </div>
   );

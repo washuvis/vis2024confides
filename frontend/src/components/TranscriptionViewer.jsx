@@ -103,7 +103,7 @@ const TranscriptionViewer = ({
         </Modal.Body>
       </Modal>
       <div className="border-b flex justify-between">
-        <p className="text-lg font-bold">Transcription View</p>
+        <p className="text-lg font-bold">Transcription</p>
         <Button
           className="hover:bg-sky-400 rounded-md"
           color="white"

@@ -37,15 +37,6 @@ const SideNav = ({ handleModal }) => {
             </Sidebar.Logo>
           )}
           <div>
-            <form className="md:hidden">
-              <TextInput
-                icon={HiSearch}
-                type="search"
-                placeholder="Search"
-                required
-                size={32}
-              />
-            </form>
             <Sidebar.Items>
               <Sidebar.ItemGroup>
                 <Sidebar.Item
@@ -60,13 +51,13 @@ const SideNav = ({ handleModal }) => {
                 <Sidebar.Item onClick={toSearch} icon={HiSearch}>
                   {collapse ? "" : "Browse"}
                 </Sidebar.Item>
-                <Sidebar.Item
+                {/* <Sidebar.Item
                   href="https://github.com/themesberg/flowbite-react/issues"
                   icon={HiInformationCircle}
                 >
                   {collapse ? "" : "Help"}
-                </Sidebar.Item>
-                <DarkThemeToggle />
+                </Sidebar.Item> */}
+                <DarkThemeToggle/>
               </Sidebar.ItemGroup>
             </Sidebar.Items>
           </div>

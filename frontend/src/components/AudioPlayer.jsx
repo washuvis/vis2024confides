@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { timePattern } from "../helper/regex";
 import { Button } from "flowbite-react";
+import WordSearchController from "./WordSearchController";
+
 
 const AudioPlayer = (props) => {
   const [audioURL, setAudioURL] = useState("");
@@ -74,7 +76,11 @@ const AudioPlayer = (props) => {
   }, []);
 
   return (
-    <div className="w-2/5">
+    <div className="w-full">
+      <h2 className="text-3xl font-bold pl-5 pt-4 dark:text-white">
+            {props.filename}.mp3
+      </h2>
+      <br></br>
       <div className="flex gap-2">
         <audio
           className="h-6 w-4/5 color-white"
@@ -83,17 +89,15 @@ const AudioPlayer = (props) => {
           controls
           ref={props.audioRef}
         />
-
-        {/* <Button
-          color="dark"
-          className="text-xs"
-          size="xs"
-          pill
-          onClick={() => storeCurrentTimeToTimeHistory()}
-        >
-          {" "}
-          Mark Time{" "}
-        </Button> */}
+        <WordSearchController
+          transcriptionViewerRef={props.transcriptionViewerRef}
+          setDataLoading={props.setDataLoading}
+          searchWord={props.searchWord}
+          setSearchWord={props.setSearchWord}
+          segmentsData={props.segmentsData}
+          searchRef={props.searchRef}
+          setSearchHistory={props.setSearchHistory}
+        />
       </div>
     </div>
   );

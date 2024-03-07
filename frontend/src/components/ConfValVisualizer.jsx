@@ -5,7 +5,6 @@ import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import ColorLegend from "../d3Components/colorLegend";
 
 const ConfValVisualizer = ({
-  tooltipRef,
   data,
   activeIndex,
   setActiveIndex,
@@ -13,7 +12,7 @@ const ConfValVisualizer = ({
   confValDivRef,
 }) => {
   const svgRef = useRef(null);
-
+  const tooltipRef = useRef(null);
   const divRef = useRef(null);
   const player = audioRef.current;
   const [openModal, setOpenModal] = useState(false);
@@ -73,7 +72,6 @@ const ConfValVisualizer = ({
         y += 60;
       }
     }
-
     svg.selectAll(".line-number").remove();
 
     svg
@@ -87,9 +85,9 @@ const ConfValVisualizer = ({
       .attr("y", (d, i) => d[2])
       .text((d) => {
         if (d[0] === d[1]) {
-          return `line ${d[0]}`;
+          return `Line ${d[0]}`;
         }
-        return `line ${d[0]} - ${d[1]}`;
+        return `Lines ${d[0]} - ${d[1]}`;
       })
       .attr("class", "lines dark:fill-white fill-gray-600")
       .attr("font-size", "12px");
@@ -124,29 +122,32 @@ const ConfValVisualizer = ({
       .attr("fill-opacity", (d, i) => d3.mean(d.listWords, (w) => w.conf_val))
       .attr("stroke-opacity", 1)
       .on("mouseover", (event, d) => {
-        // Show tooltip on mouseover
         const content = (
-          <div>
-            <p>
-              <b>Line Number:</b> {data.indexOf(d) + 1}
+          `<p>
+              <b>Line Number:</b> ${data.indexOf(d) + 1}
             </p>
             <div className="flex">
               <p className="font-bold">Average Confidence Value:</p>
               <div
-                className={`bg-sky-500 text-white rounded-sm w-12 mx-2 text-center opacity-${parseInt(
-                  d3.mean(d.listWords, (w) => w.conf_val) * 100
-                )}`}
-              >
-                {d3.mean(d.listWords, (w) => w.conf_val).toFixed(2)}
+                className="bg-sky-500 text-white rounded-sm w-12 mx-2 text-center">
+                ${d3.mean(d.listWords, (w) => w.conf_val).toFixed(2)}
               </div>
             </div>
 
             <p>
-              <span className="font-bold"> Text: </span> {d.text}{" "}
-            </p>
-          </div>
-        );
+              <span className="font-bold"> Text: </span> ${d.text}{" "}
+            </p>`
+        )
+        tooltip.style("opacity", 1)
+                .html(content)
+                .style("left", (event.pageX) + "px")
+                .style("top", (event.pageY - 28) + "px");
+
       })
+      .on("mouseout", (event, d) => {
+        tooltip.style("opacity", 0)
+      })
+      // })
       .on("click", (event, d) => {
         player.currentTime = data[data.indexOf(d)].startTime;
         player.play();
@@ -155,11 +156,18 @@ const ConfValVisualizer = ({
 
     // Create y-axis
   }, [data, activeIndex]);
+  const tooltip = d3.select(tooltipRef.current)
+      .style("opacity", 0)
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "10px");
 
   return (
     <div className="flex flex-col mx-4 relative overflow-y-auto relative">
       <div className="flex border-b justify-between ">
-        <p className="text-lg font-bold dark:text-white">Timeline View</p>
+        <p className="text-lg font-bold dark:text-white">Timeline</p>
 
         <Button
           color="white"
@@ -190,7 +198,9 @@ const ConfValVisualizer = ({
         ref={divRef}
         style={{ height: "40rem" }}
       >
-        <svg className="text-center" ref={svgRef}></svg>
+        <svg className="text-center" ref={svgRef}>
+          <div ref={tooltipRef}></div>
+        </svg>
       </div>
     </div>
   );

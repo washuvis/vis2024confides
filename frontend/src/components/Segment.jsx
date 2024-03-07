@@ -20,6 +20,11 @@ const Segment = (props) => {
     spk_9: schemeTableau10[9],
   };
 
+  function getSpeakerNum(number){
+    const num = number.split('_');
+    return parseInt(num[1]) + 1;
+  }
+
   function fancyTimeFormat(duration) {
     const hrs = ~~(duration / 3600);
     const mins = ~~((duration % 3600) / 60);
@@ -51,21 +56,19 @@ const Segment = (props) => {
 
   return (
     <>
-      <div className="flex" style={{height: "100%", marginBottom: "12px" }}>
-        <div style={{ width: "40px", marginRight: "1rem" }}>
-          <div
-            className="dark:text-white text-xs
-            "
+      <div className="flex" style={{height: "100%", marginBottom: "30px", marginTop: "20px"}}>
+        <div style={{marginRight: "1rem" }}>
+          <div style={{width:"80px"}}
+            className="dark:text-white text-gray-600 text-xs"
           >
-            line {props.currentLine + 1}{" "}
+            Line {props.currentLine + 1}{" "}
           </div>
           <div
-            className=" text-xs"
             style={{
               color: speakerColors[props.currentSegment.speaker],
             }}
           >
-            {props.currentSegment.speaker + "  "}{" "}
+            <span className=" text-s">Speaker {getSpeakerNum(props.currentSegment.speaker)}</span>
           </div>
         </div>
         <div
@@ -74,16 +77,9 @@ const Segment = (props) => {
           style={{ zIndex: 1, textAlign: "left" }}
         >
           <div
-            className=" text-xs"
-            style={{
-              color: speakerColors[props.currentSegment.speaker],
-            }}
+            className=" text-xs dark:text-white text-gray-600"
           >
-            [
-            {fancyTimeFormat(props.currentSegment.startTime) +
-              "-" +
-              fancyTimeFormat(props.currentSegment.endTime)}
-            ]
+            {fancyTimeFormat(props.currentSegment.startTime)}
           </div>
             <div 
               id={'sentence-' + props.currentSegment.id + '-text'} 
@@ -91,8 +87,11 @@ const Segment = (props) => {
               suppressContentEditableWarning="true"
             >
             {props.currentSegment
-              ? props.currentSegment.listWords.map((word) => {
+              ? props.currentSegment.listWords.map((word, i) => {
                   if (word) {
+                    // if(i != (props.currentSegment.listWords.length - 1) && props.currentSegment.listWords[i + 1].is_punctuation){
+                    //   console.log(props.currentSegment.listWords[i + 1].word)
+                    // }
                     var transformedConfVal =
                       parseFloat(word.conf_val) >= 1.0
                         ? ""
@@ -110,7 +109,7 @@ const Segment = (props) => {
                         }
                       >
                         <span
-                          className={` text-xs dark:text-white`}
+                          className={`text-s dark:text-white`}
                           style={{
                             background: props.currentSegment.highlight,
                             fontWeight: `${props.isCurrentSegmentPlaying}`,
@@ -122,7 +121,7 @@ const Segment = (props) => {
                           }}
                           key={word.content + Math.random()}
                         >
-                          {word.word + " "}
+                          {i != (props.currentSegment.listWords.length - 1) && props.currentSegment.listWords[i + 1].is_punctuation ? word.word: word.word + " "}
                         </span>
                       </OverlayTrigger>
                     );

@@ -211,7 +211,7 @@ const ContextWindowVisualizer = ({
         </Modal.Body>
       </Modal>
       <div className="flex my-2 mx-4 gap-4 border-b">
-        <p className="text-lg font-bold dark:text-white">Context Window View</p>
+        <p className="text-lg font-bold dark:text-white">Context Window</p>
         <Button.Group>
           <Tooltip content="Go Back" style="light">
             <Button

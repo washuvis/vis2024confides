@@ -11,7 +11,6 @@ import UploadFileModal from "../components/UploadFileModal";
 import {waitForElement,} from "../controller/ElementTimeOutController";
 
 const Transcription = ({ showUploadModal, handleModal }) => {
-  const tooltipRef = useRef(null);
   const queryParameters = new URLSearchParams(window.location.search);
   const filename = queryParameters.get("file");
   const [time, setTime] = useState(new Date());
@@ -86,35 +85,28 @@ const Transcription = ({ showUploadModal, handleModal }) => {
   useEffect(() => {}, [searchWord]);
 
   return (
-    <div className=" w-screen h-dvh flex ">
+    <div className="w-screen h-dvh flex ">
       <SideNav handleModal={handleModal} />
       <div className="flex flex-col items-center gap-2 bg-gray-100 dark:bg-gray-900 w-full">
-        {/* <Nav /> */}
         <UploadFileModal
           showUploadModal={showUploadModal}
           handleModal={handleModal}
         />
-        <div className=" flex justify-center items-center w-full pt-8 gap-8">
-          <p className="text-lg font-bold dark:text-white">
-            Currently playing:{filename}
-            .mp3
-          </p>{" "}
-          <WordSearchController
-            transcriptionViewerRef={transcriptionViewerRef}
-            setDataLoading={setDataLoading}
-            searchWord={searchWord}
-            setSearchWord={setSearchWord}
-            segmentsData={segmentsData}
-            searchRef={searchRef}
-            setSearchHistory={setSearchHistory}
-          />
+        <div className="w-full">
           <AudioPlayer
-            filename={filename}
-            src={"../../storage/" + filename + ".ogg"}
-            audioRef={audioRef}
-            data={segmentsData}
-            activeIndex={activeIndex}
-            setTimeHistory={setTimeHistory}
+              filename={filename}
+              src={"../../storage/" + filename + ".ogg"}
+              audioRef={audioRef}
+              data={segmentsData}
+              activeIndex={activeIndex}
+              setTimeHistory={setTimeHistory}
+              transcriptionViewerRef={transcriptionViewerRef}
+              setDataLoading={setDataLoading}
+              searchWord={searchWord}
+              setSearchWord={setSearchWord}
+              segmentsData={segmentsData}
+              searchRef={searchRef}
+              setSearchHistory={setSearchHistory}
           />
         </div>
         <div className="w-full grid grid-rows-6 grid-cols-8 gap-2 py-4 px-2 auto-cols-max">
@@ -158,7 +150,6 @@ const Transcription = ({ showUploadModal, handleModal }) => {
           >
             {" "}
             <ConfValVisualizer
-              tooltipRef={tooltipRef}
               data={segmentsData}
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
@@ -166,40 +157,6 @@ const Transcription = ({ showUploadModal, handleModal }) => {
               confValDivRef={confValDivRef}
             />
           </div>
-          {/* <div className=" row-start-1 row-span-2 col-start-6 col-span-2  grid  grid-rows-2 gap-2  ">
-            <div className="view-container px-4 py-4 bg-gray-50 dark:text-white dark:bg-gray-800 row-start-1 row-span-1 relative">
-              <div className="border-b">
-                <p className="font-bold text-lg"> Line Detailed View </p>
-              </div>
-              {tooltipContent && (
-                <div
-                  className=" my-2 text-xs dark:text-white overflow-y-scroll relative h-4/5 scrollbar-hide"
-                  ref={tooltipRef}
-                >
-                  {tooltipContent}
-                </div>
-              )}
-            </div>
-            <div className="view-container bg-gray-50 dark:text-white dark:bg-gray-800 row-start-2 row-span-1">
-              <Notes />
-            </div>
-          </div> */}
-          {/* <div className=" row-start-3 row-span-2 col-start-6 col-span-2  grid  grid-cols-2 gap-2  ">
-            <div className="view-container px-4 py-4 bg-gray-50 text-sm dark:text-white dark:bg-gray-800 col-start-1 col-span-1">
-              <div className="border-b justify-center items-center ">
-                <p className="font-bold text-lg "> Marked Times </p>
-              </div>
-
-              <TimeHistory
-                audioRef={audioRef}
-                setTimeHistory={setTimeHistory}
-                timeHistory={timeHistory}
-              />
-            </div>
-            <div className="view-container px-4 py-4 bg-gray-50 dark:text-white dark:bg-gray-800 text-sm col-start-2 col-span-1">
-              <RelatedFilesVisualizer filename={filename} />
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
