@@ -139,14 +139,14 @@ const ConfValVisualizer = ({
             </p>`
         );
 
-        tooltip.style("opacity", 1)
+        tooltip.style("visibility", "visible")
                 .html(content)
                 .style("left", (event.x)/2 + "px")
                 .style("top", (event.y)/2 + "px");
 
       })
       .on("mouseout", (event, d) => {
-        tooltip.style("opacity", 0)
+        tooltip.style("visibility", "hidden")
       })
       // })
       .on("click", (event, d) => {
@@ -158,7 +158,9 @@ const ConfValVisualizer = ({
     // Create y-axis
   }, [data, activeIndex]);
   const tooltip = d3.select(tooltipRef.current)
-      .style("opacity", 0)
+      .style("visibility", "hidden")
+      .style("position", "absolute")
+      .style("background-color", "white")
       .attr("class", "tooltip")
       .style("border", "solid")
       .style("border-width", "1px")

@@ -9,6 +9,7 @@ import ConfValVisualizer from "../components/ConfValVisualizer";
 import SideNav from "../components/SideNav";
 import UploadFileModal from "../components/UploadFileModal";
 import {waitForElement,} from "../controller/ElementTimeOutController";
+import Sententree from "../components/Sententree";
 
 const Transcription = ({ showUploadModal, handleModal }) => {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -112,7 +113,7 @@ const Transcription = ({ showUploadModal, handleModal }) => {
         <div className="w-full grid grid-rows-6 grid-cols-8 gap-2 py-4 px-2 auto-cols-max">
           {/* Middle Column with More Space */}
           <div className="view-container dark:text-white bg-gray-50 dark:bg-gray-800 row-start-5 row-span-2 col-start-1 col-span-3 ">
-            <ContextWindowVisualizer
+            <Sententree
               searchWord={searchWord}
               setSearchWord={setSearchWord}
               searchRef={searchRef}

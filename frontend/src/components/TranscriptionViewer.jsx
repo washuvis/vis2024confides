@@ -59,10 +59,9 @@ const TranscriptionViewer = ({
     }
   };
 
-  if (player && !(player.paused)) {
+  if (player) {
     player.ontimeupdate = (event) => {
       const currentTime = player.currentTime;
-
       handleTimeUpdate(currentTime);
     };
   }
@@ -119,7 +118,7 @@ const TranscriptionViewer = ({
         {data
           ? data.map((item, i) => (
               <React.Fragment key={Math.random() + "frag"}>
-                <div onClick={() => handleClick(i)}>
+                <div>
                   <Segment
                     confidenceOn={confidenceOn}
                     confidenceRange={confidenceRange}
@@ -128,6 +127,7 @@ const TranscriptionViewer = ({
                     }
                     currentSegment={item}
                     currentLine={i}
+                    clickFunction={handleClick}
                   />
                 </div>
               </React.Fragment>

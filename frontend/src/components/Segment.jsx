@@ -7,6 +7,7 @@ import EditableElement from "./EditableElement";
 
 
 const Segment = (props) => {
+  let numSpeakers = [];
   let speakerColors = {
     spk_0: schemeTableau10[0],
     spk_1: schemeTableau10[1],
@@ -110,6 +111,7 @@ const Segment = (props) => {
                       >
                         <span
                           className={`text-s dark:text-white`}
+                          onClick={() => props.clickFunction(props.currentLine)}
                           style={{
                             background: props.currentSegment.highlight,
                             fontWeight: `${props.isCurrentSegmentPlaying}`,

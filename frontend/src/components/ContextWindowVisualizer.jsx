@@ -34,6 +34,7 @@ const ContextWindowVisualizer = ({
   const [openSetting, setOpenSetting] = useState(false);
   const [loading, setLoading] = useState(false);
   const [numWords, setNumWords] = useState(5);
+  
   async function handleWordBtnClick(e) {
     e.preventDefault();
 

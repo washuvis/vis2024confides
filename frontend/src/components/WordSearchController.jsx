@@ -17,8 +17,7 @@ const WordSearchController = ({
   searchRef,
   setSearchHistory,
 }) => {
-  const [transcriptionViewActiveIndex, setTranscriptionViewActiveIndex] =
-    useState(0);
+  const [transcriptionViewActiveIndex, setTranscriptionViewActiveIndex] = useState(0);
   const searchIndicesRef = useRef([]);
   const [searchIndices, setSearchIndices] = useState([]);
   const lastIndexRef = useRef(-1);
