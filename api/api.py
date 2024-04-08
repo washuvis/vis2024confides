@@ -5,6 +5,7 @@ import context_window_analyzer
 import average_conf_val
 import io
 import os
+import sententree
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -51,9 +52,13 @@ def post_context_windows():
     num_words = int(request.json["num_words"])
     return context_window_analyzer.publish_context_windows(filename, target_word, num_words)
 
-# @app.route('/')
-# def index():
-#     return render_template("index.html")
+@app.route('/sententree',methods = ['POST'])
+@cross_origin()
+def post_sententree_data():
+    filename = request.json['filename']
+    print(filename)
+    target_word = request.json['target_word']
+    return sententree.create_sententree(filename, target_word)
 
 @app.route('/upload',methods = ['POST'])
 @cross_origin()
@@ -62,11 +67,4 @@ def post_aws_transcribe():
    uploaded_file = request.files['file']
    message, response_code = aws_transcribe.s3_upload_and_transcribe(uploaded_file, uploaded_file.filename)
    response_data = {'message': message}
-#    print(response_data["message"])
    return jsonify(response_data), response_code
-   # return aws_transcribe.amazon_transcribe("911.mp3")
-   #return 
-
-
-# if __name__ == '__main__':
-#     app.run(host='127.0.0.1', port=32772, debug=True)
