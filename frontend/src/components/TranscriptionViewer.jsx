@@ -120,6 +120,7 @@ const TranscriptionViewer = ({
               <React.Fragment key={Math.random() + "frag"}>
                 <div>
                   <Segment
+                    searchWord={searchWord}
                     confidenceOn={confidenceOn}
                     confidenceRange={confidenceRange}
                     isCurrentSegmentPlaying={

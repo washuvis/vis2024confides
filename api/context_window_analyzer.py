@@ -21,7 +21,7 @@ def publish_context_windows(filename, target_word, num_words:int):
     file_data = response['Body'].read()
    
     data = json.loads(file_data)
-    print(data)
+    # print(data)
     
     #words = [entry["list_words"]["word"] for entry in list_words.values()]
     tokens = []

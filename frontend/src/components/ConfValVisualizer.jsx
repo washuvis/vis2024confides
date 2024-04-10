@@ -130,7 +130,7 @@ const ConfValVisualizer = ({
             <div class="flex">
               <p><b>Average Confidence Value:</b></p>
               <div
-                class="bg-sky-500 text-white rounded-sm w-12 mx-2 text-center opacity-${opacity}">
+                class="bg-sky-500 text-white rounded-sm w-12 mx-2 text-center" style="opacity:${opacity * .01}">
                 ${d3.mean(d.listWords, (w) => w.conf_val).toFixed(2)}
               </div>
             </div>
@@ -141,8 +141,8 @@ const ConfValVisualizer = ({
 
         tooltip.style("visibility", "visible")
                 .html(content)
-                .style("left", (event.x)/2 + "px")
-                .style("top", (event.y)/2 + "px");
+                .style("left", (event.offsetX)+ "px")
+                .style("top", (event.offsetY) + "px");
 
       })
       .on("mouseout", (event, d) => {

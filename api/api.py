@@ -47,7 +47,7 @@ def getAudio():
 @cross_origin()
 def post_context_windows():
     filename = request.json['filename']
-    print(filename)
+    # print(filename)
     target_word = request.json['target_word']
     num_words = int(request.json["num_words"])
     return context_window_analyzer.publish_context_windows(filename, target_word, num_words)
@@ -56,7 +56,7 @@ def post_context_windows():
 @cross_origin()
 def post_sententree_data():
     filename = request.json['filename']
-    print(filename)
+    # print(filename)
     target_word = request.json['target_word']
     return sententree.create_sententree(filename, target_word)
 

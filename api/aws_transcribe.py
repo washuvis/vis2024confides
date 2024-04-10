@@ -54,7 +54,7 @@ def get_data(filename):
     return response  
 def get_audio(filename):
     S3_OBJECT_KEY = f"audio/{filename}"
-    print(S3_OBJECT_KEY)
+    # print(S3_OBJECT_KEY)
     url = aws_client.generate_presigned_url(
         'get_object',
         Params={

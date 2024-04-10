@@ -6,7 +6,6 @@ import {
   HiChevronUp,
   HiX
 } from "react-icons/hi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const WordSearchController = ({
   transcriptionViewerRef,
@@ -56,8 +55,7 @@ const WordSearchController = ({
       setSearchIndices((indices) => [...tempSearchIndices]);
 
       const transcriptEl = transcriptionViewerRef.current;
-
-      const activeEl = transcriptEl.children[transcriptionViewActiveIndex];
+      const activeEl = transcriptEl.children[0].children[1].children[tempSearchIndices[0]];
       if (activeEl) {
         activeEl.scrollIntoView({
           behavior: "instant",
@@ -118,8 +116,6 @@ const WordSearchController = ({
     setCurrentIndex((i) => (i >= lastIndex ? i : i + 1));
     setTranscriptionViewActiveIndex((index) => searchIndices[currentIndex]);
     const transcriptEl = transcriptionViewerRef.current;
-    console.log(transcriptionViewActiveIndex);
-
     const activeEl =
       transcriptEl.children[0].children[1].children[
         transcriptionViewActiveIndex

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { schemeTableau10 } from "https://cdn.skypack.dev/d3-scale-chromatic@3";
 import EditableElement from "./EditableElement";
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -103,17 +103,18 @@ const Segment = (props) => {
                         key={Math.random() + "overlayTrigger"}
                         placement="bottom"
                         overlay={
-                          <Popover id="popover-positioned-bottom" className="tooltip">
-                              {"Confidence Score: " +
+                          <Tooltip id="popover-positioned-bottom" className="tooltip" style={{position: 'absolute', padding: '2px 10px'}}>
+                            {"Confidence Score: " +
                                 Math.round(word.conf_val * 100) +
-                                "%"}</Popover>
+                                "%"}
+                          </Tooltip>
                         }
                       >
                         <span
                           className={`text-s dark:text-white`}
                           onClick={() => props.clickFunction(props.currentLine)}
                           style={{
-                            background: props.currentSegment.highlight,
+                            background: word.word.toLowerCase() === props.searchWord.toLowerCase() ? props.currentSegment.highlight: "transparent",
                             fontWeight: `${props.isCurrentSegmentPlaying}`,
                             color: style(word),
                             textDecoration: "underline",

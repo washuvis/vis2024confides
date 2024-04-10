@@ -1,5 +1,6 @@
 import json
 import sys
+import re
 import aws_transcribe
 
 def create_sententree(filename, target_word):
@@ -11,16 +12,15 @@ def create_sententree(filename, target_word):
     sentences.append(['Phrases'])
     for key, entry in data.items(): 
         if target_word:
-            if target_word.lower() in entry['text'].lower():
-                # sentence = {}
-                # sentence['id'] = int(key)
-                # sentence['text'] = entry['text']
-                sentences.append([entry['text']])
+            lowered_text = entry['text'].lower()
+            if target_word.lower() in lowered_text:
+                cleaned_text = re.sub(r'[^\w\s]', '', lowered_text)
+                sentences.append([cleaned_text])
 
     data = {}
     data["data"] = sentences
     data["text"] = f"Context windows for '{target_word}':"
-    print(data["data"])
+    # print(data["data"])
 
     json_data = json.dumps(data)
     return json_data

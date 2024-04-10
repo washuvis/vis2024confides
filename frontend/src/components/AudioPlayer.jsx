@@ -68,7 +68,7 @@ const AudioPlayer = (props) => {
     axios
       .get(`http://127.0.0.1:5000/audio?file=${props.filename}.mp3`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         return response.data;
       })
       .then((url) => setAudioURL(url))
