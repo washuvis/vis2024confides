@@ -114,7 +114,7 @@ const TranscriptionViewer = ({
           <HiOutlineQuestionMarkCircle />{" "}
         </Button>
       </div>
-      <div className="relative overflow-y-scroll h-5/6">
+      <div className="overflow-y-scroll h-5/6">
         {data
           ? data.map((item, i) => (
               <React.Fragment key={Math.random() + "frag"}>

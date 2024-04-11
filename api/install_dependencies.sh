@@ -23,3 +23,6 @@ pip install nltk
 
 # Install vaderSentiment
 pip install vaderSentiment
+
+# Install BeautifulSoup
+pip install beautifulsoup4

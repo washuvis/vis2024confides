@@ -103,7 +103,7 @@ const Segment = (props) => {
                         key={Math.random() + "overlayTrigger"}
                         placement="bottom"
                         overlay={
-                          <Tooltip id="popover-positioned-bottom" className="tooltip" style={{position: 'absolute', padding: '2px 10px'}}>
+                          <Tooltip id="popover-positioned-bottom" className="tooltip" style={{position: 'absolute', padding: '2px 10px', backgroundColor: 'rgb(255,255,255)', borderRadius: 15}}>
                             {"Confidence Score: " +
                                 Math.round(word.conf_val * 100) +
                                 "%"}

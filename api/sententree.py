@@ -2,11 +2,12 @@ import json
 import sys
 import re
 import aws_transcribe
+from homophones import Pyphones
 
 def create_sententree(filename, target_word):
     response = aws_transcribe.get_data(filename)
     file_data = response['Body'].read()
-   
+    homophones = []
     data = json.loads(file_data)
     sentences = []
     sentences.append(['Phrases'])
@@ -19,8 +20,13 @@ def create_sententree(filename, target_word):
 
     data = {}
     data["data"] = sentences
-    data["text"] = f"Context windows for '{target_word}':"
-    # print(data["data"])
+    # data["text"] = f"Context windows for '{target_word}':"
+    if target_word != '':
+        result = Pyphones(target_word).get_the_homophones()[target_word]
+        if len(result) > 0:
+            homophones = result[0]
+    data["homophones"] = homophones
+    print(data)
 
     json_data = json.dumps(data)
     return json_data

@@ -110,9 +110,17 @@ const Transcription = ({ showUploadModal, handleModal }) => {
               setSearchHistory={setSearchHistory}
           />
         </div>
-        <div className="w-full grid grid-rows-6 grid-cols-8 gap-2 py-4 px-2 auto-cols-max">
-          {/* Middle Column with More Space */}
-          <div className="view-container dark:text-white bg-gray-50 dark:bg-gray-800 row-start-5 row-span-2 col-start-1 col-span-3 ">
+        <div className="w-full h-5/6 grid grid-rows-6 grid-cols-8 gap-2 py-4 px-2 auto-cols-max">
+        <div ref={confValDivRef} className="view-container bg-gray-50 dark:bg-gray-800 dark:text-white py-4 row-span-3 col-start-1 overflow-y-hidden col-span-3 ">
+            <ConfValVisualizer
+              data={segmentsData}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+              audioRef={audioRef}
+              confValDivRef={confValDivRef}
+            />
+          </div>
+          <div className="view-container dark:text-white bg-gray-50 dark:bg-gray-800 row-span-3 col-start-1 col-span-3 overflow-y-hidden">
             <Sententree
               searchWord={searchWord}
               setSearchWord={setSearchWord}
@@ -126,7 +134,6 @@ const Transcription = ({ showUploadModal, handleModal }) => {
 
           {/* Right Column */}
           <div className="view-container bg-gray-50 dark:text-white dark:bg-gray-800 row-start-1 row-span-6 col-start-4 col-span-5 py-4 px-4 relative">
-            {" "}
             <div ref={transcriptionViewerRef}>
               {segmentsData.length > 0 ? (
                 <TranscriptionViewer
@@ -142,21 +149,6 @@ const Transcription = ({ showUploadModal, handleModal }) => {
                 />
               ) : null}
             </div>
-          </div>
-
-          {/* Second Row */}
-          <div
-            ref={confValDivRef}
-            className="view-container bg-gray-50 dark:bg-gray-800 dark:text-white py-4 row-start-1 row-span-4 col-start-1 overflow-y-hidden col-span-3 "
-          >
-            {" "}
-            <ConfValVisualizer
-              data={segmentsData}
-              activeIndex={activeIndex}
-              setActiveIndex={setActiveIndex}
-              audioRef={audioRef}
-              confValDivRef={confValDivRef}
-            />
           </div>
         </div>
       </div>

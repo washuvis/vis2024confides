@@ -128,10 +128,10 @@ const ConfValVisualizer = ({
               <b>Line Number:</b> ${data.indexOf(d) + 1}
             </p>
             <div class="flex">
-              <p><b>Average Confidence Value:</b></p>
+              <p><b>Average Confidence of Line:</b></p>
               <div
                 class="bg-sky-500 text-white rounded-sm w-12 mx-2 text-center" style="opacity:${opacity * .01}">
-                ${d3.mean(d.listWords, (w) => w.conf_val).toFixed(2)}
+                ${d3.mean(d.listWords, (w) => w.conf_val).toFixed(2) * 100 }%
               </div>
             </div>
             <p>

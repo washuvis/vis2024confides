@@ -17,6 +17,9 @@ h1 {
 }
 .tooltip {
     z-index: 1010;
-    border: 2px solid black;
-    background-color: white;
+    border: 1px solid lightgray;
 }
+.confVal::-webkit-scrollbar {
+    display: none;
+  }
+  

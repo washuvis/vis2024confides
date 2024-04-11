@@ -47,13 +47,12 @@ const Sententree = ({
         if (sentences["data"] && sentences["data"].length > 1){
 
           const temp = {
-            maxFontSize: 25,
             backgroundColor: "#F9FAFB",
             wordtree: {
               format: "implicit",
               type: "double",
               word: searchWord
-            },
+            }
           };
           setOptions((options) => temp);
         }
@@ -61,13 +60,25 @@ const Sententree = ({
 
 
     return (
-        <div className="py-2 my-2">
+        <div className="py-2 my-2 justify-center items-center">
           <div className="flex my-2 mx-4 gap-4 border-b">
             <p className="text-lg font-bold dark:text-white">Word Tree</p>
           </div>
-          <div className="flex flex-col justify-center items-center w-11/12 my-2">
+          <div className="flex flex-col items-center justify-center my-2">
             {sentences["data"] && sentences["data"].length > 1 && options['wordtree']['word'] === searchWord ? (
-              <Chart chartType="WordTree" width="100%" height="150px" data={sentences["data"]} options={options} className="justify-center items-center"/>
+              <>
+                  <div className="text-xl">
+                    Homphones for <b>{searchWord}</b>:  
+                    {sentences["homophones"] && sentences["homophones"].length > 0 ? (sentences["homophones"].map(function(data, i){
+                      if (i < sentences["homophones"].length - 1){
+                        return <span> {data},</span>
+                      }
+                        return <span> {data}</span>
+                    })) : null}
+                  </div>
+                <Chart chartType="WordTree" width="100%" height="430px" data={sentences["data"]} options={options}/>
+              </>
+             
             ) : (
               <p> Search the target word above to populate this view. </p>
             )}
