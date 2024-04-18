@@ -74,7 +74,7 @@ const Sententree = ({
                         return <span> {data},</span>
                       }
                         return <span> {data}</span>
-                    })) : null}
+                    })) : " N/A"}
                   </div>
                 <Chart chartType="WordTree" width="100%" height="430px" data={sentences["data"]} options={options}/>
               </>

@@ -1,6 +1,7 @@
 """
 Python wrapper for the website: https://www.homophone.com/
 Gets the homophones of a word.
+Code from: https://github.com/kjanjua26/Pyphones
 """
 
 from urllib.request import urlopen

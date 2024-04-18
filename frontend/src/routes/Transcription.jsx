@@ -98,7 +98,6 @@ const Transcription = ({ showUploadModal, handleModal }) => {
               filename={filename}
               src={"../../storage/" + filename + ".ogg"}
               audioRef={audioRef}
-              data={segmentsData}
               activeIndex={activeIndex}
               setTimeHistory={setTimeHistory}
               transcriptionViewerRef={transcriptionViewerRef}
