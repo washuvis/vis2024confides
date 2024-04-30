@@ -114,7 +114,7 @@ const Segment = (props) => {
                           className={`text-s dark:text-white`}
                           onClick={() => props.clickFunction(props.currentLine)}
                           style={{
-                            background: word.word.toLowerCase() === props.searchWord.toLowerCase() ? props.currentSegment.highlight: "transparent",
+                            background: word.word.toLowerCase().includes(props.searchWord.toLowerCase()) ? props.currentSegment.highlight : "transparent",
                             fontWeight: `${props.isCurrentSegmentPlaying}`,
                             color: style(word),
                             textDecoration: "underline",

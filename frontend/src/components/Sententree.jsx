@@ -71,9 +71,9 @@ const Sententree = ({
                     Homphones for <b>{searchWord}</b>:  
                     {sentences["homophones"] && sentences["homophones"].length > 0 ? (sentences["homophones"].map(function(data, i){
                       if (i < sentences["homophones"].length - 1){
-                        return <span> {data},</span>
+                        return <span key={data}> {data},</span>
                       }
-                        return <span> {data}</span>
+                        return <span key={data}> {data}</span>
                     })) : " N/A"}
                   </div>
                 <Chart chartType="WordTree" width="100%" height="430px" data={sentences["data"]} options={options}/>

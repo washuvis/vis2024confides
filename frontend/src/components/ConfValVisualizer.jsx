@@ -51,7 +51,7 @@ const ConfValVisualizer = ({
       .domain([0, 40]);
 
     const lineArr = Array.from(Array(lineLen).keys());
-    let x = 80;
+    let x = 100;
     let y = 10;
     let index = 0;
     let startIndex = 1;
@@ -64,7 +64,7 @@ const ConfValVisualizer = ({
       index += 1;
       if (x >= width - 120 || i == data.length - 1) {
         index = 0;
-        x = 80;
+        x = 100;
 
         const endIndex = i + 1;
         lineInRow.push([startIndex, endIndex, y + 20]);
@@ -170,7 +170,7 @@ const ConfValVisualizer = ({
   return (
     <div className="flex flex-col mx-4 relative overflow-y-auto relative">
       <div className="flex border-b justify-between ">
-        <p className="text-lg font-bold dark:text-white">Timeline</p>
+        <p className="text-lg font-bold dark:text-white">Confidence Overview</p>
 
         <Button
           color="white"

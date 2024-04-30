@@ -26,7 +26,6 @@ def create_sententree(filename, target_word):
         if len(result) > 0:
             homophones = result[0]
     data["homophones"] = homophones
-    print(data)
 
     json_data = json.dumps(data)
     return json_data
