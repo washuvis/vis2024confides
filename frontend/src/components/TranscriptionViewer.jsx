@@ -11,6 +11,7 @@ import {
 const TranscriptionViewer = ({
   transcriptionViewerRef,
   confidenceOn,
+  setSegmentsData,
   data,
   confidenceRange,
   audioRef,
@@ -126,6 +127,8 @@ const TranscriptionViewer = ({
                     isCurrentSegmentPlaying={
                       i === activeIndex ? "bold" : "normal"
                     }
+                    setSegmentsData={setSegmentsData}
+                    segements={data}
                     currentSegment={item}
                     currentLine={i}
                     clickFunction={handleClick}

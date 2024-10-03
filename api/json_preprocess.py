@@ -24,6 +24,7 @@ def json_preprocess(data, data_name):
 
         }
         if "alternatives" in items:
+            alternative_word_indicies = [item for item in range(1, len(items["alternatives"]) - 1)]
             for i,item in enumerate(items["alternatives"][0]["items"]):
                 if 'start_time' in item:
                     segmentsJsonBuilder[j]["list_words"].append( {
@@ -32,6 +33,7 @@ def json_preprocess(data, data_name):
                             "word" : item["content"],
                             "conf_val" : float(item["confidence"]),
                             "is_punctuation": False,
+                            # "alternatives": map(lambda alt_cnt: items['alternatives'][alt_cnt]["items"]["content"], alternative_word_indicies)
                         })
             
                 else:
@@ -41,6 +43,7 @@ def json_preprocess(data, data_name):
                             "word" : item ["content"],
                             "conf_val" : float(item ["confidence"]),
                             "is_punctuation": True,
+                            # "alternatives": []
                         })
 
 

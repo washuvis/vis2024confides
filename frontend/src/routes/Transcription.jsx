@@ -41,9 +41,11 @@ const Transcription = ({ showUploadModal, handleModal }) => {
 
   function fetchFile() {
     setDataLoading((dataLoading) => true);
-    transcriptModel.fetchJson(filename).then((data) => {
-      setSegmentsData((segments) => data);
-    });
+    if(segmentsData.length === 0){
+      transcriptModel.fetchJson(filename).then((data) => {
+        setSegmentsData((segments) => data);
+      });
+    }
   }
 
   const hideColumn = () => {
@@ -62,7 +64,7 @@ const Transcription = ({ showUploadModal, handleModal }) => {
     fetchFile();
   }, []);
   useEffect(() => {
-    setSegmentsData((segments) => []);
+    // setSegmentsData((segments) => []);
 
     setDataLoading((dataLoading) => false);
 
@@ -138,6 +140,7 @@ const Transcription = ({ showUploadModal, handleModal }) => {
                 <TranscriptionViewer
                   transcriptionViewerRef={transcriptionViewerRef}
                   confidenceOn={confidenceOn}
+                  setSegmentsData={setSegmentsData}
                   data={segmentsData}
                   confidenceRange={confidenceRange}
                   audioRef={audioRef}

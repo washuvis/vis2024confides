@@ -55,6 +55,10 @@ const Segment = (props) => {
     return "rgba(0,0,0," + 1 + ")";
   }
 
+  const onInput = (e, i) => {
+    props.segements[props.currentLine].listWords[i].word = e.currentTarget.innerText;
+  }
+
   return (
     <>
       <div className="flex" style={{height: "100%", marginBottom: "30px", marginTop: "20px"}}>
@@ -84,8 +88,6 @@ const Segment = (props) => {
           </div>
             <div 
               id={'sentence-' + props.currentSegment.id + '-text'} 
-              contentEditable="true"
-              suppressContentEditableWarning="true"
             >
             {props.currentSegment
               ? props.currentSegment.listWords.map((word, i) => {
@@ -112,6 +114,9 @@ const Segment = (props) => {
                       >
                         <span
                           className={`text-s dark:text-white`}
+                          contentEditable="true"
+                          suppressContentEditableWarning="true"
+                          onInput={(event) => onInput(event, i)}
                           onClick={() => props.clickFunction(props.currentLine)}
                           style={{
                             background: word.word.toLowerCase().includes(props.searchWord.toLowerCase()) ? props.currentSegment.highlight : "transparent",
